@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import sleep
 
 
@@ -60,12 +60,12 @@ data['Parameters'][2]['Pressure'].pop(0)
 data['Parameters'][3]['Outdoor'].append(current_parameters[3])
 data['Parameters'][3]['Outdoor'].pop(0)
 
-data['Date'].append(current_date.isoformat())
+data['Date'].append((current_date+timedelta(hours=7)).isoformat())
 data['Date'].pop(0)
 
 #Открываем файл, сохраняем данные
 with open('data.json', 'w') as outfile:
     json.dump(data, outfile)
 
-print (data)
+
 
